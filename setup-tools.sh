@@ -19,7 +19,7 @@ rm -f awscliv2.zip
 rm -rf aws
 
 # setup for AWS cli
-aws sts get-caller-identity --query Arn | grep eksworkshop-admin > /dev/null
+aws sts get-caller-identity --query Arn | grep AWSCloud9SSMAccessRole > /dev/null
 if [ $? -eq 0 ]; then
   rm -vf ${HOME}/.aws/credentials
   export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
@@ -35,7 +35,7 @@ if [ $? -eq 0 ]; then
   aws configure set default.region ${AWS_REGION}
   aws configure get region
 else
-  echo "ERROR: Could not find Instance profile eksworkshop-admin! - DO NOT PROCEED exiting"
+  echo "ERROR: Could not find Instance profile AWSCloud9SSMAccessRole! - DO NOT PROCEED exiting"
   exit
 fi
 
@@ -107,7 +107,7 @@ pip3 install git-remote-codecommit 2&> /dev/null
 
 # ------  resize OS disk -----------
 # Specify the desired volume size in GiB as a command-line argument. If not specified, default to 32 GiB.
-VOLUME_SIZE=${1:-32}
+VOLUME_SIZE=${1:-73}
 
 # Get the ID of the environment host Amazon EC2 instance.
 INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data//instance-id)
